@@ -42,11 +42,14 @@ class Server{
             console.log('Connected client', socket.id);
 
             socket.on('disconnect', ()=>{
-                console.log('Disconnected client', socket.id);
+                // console.log('Disconnected client', socket.id);
             })
 
-            socket.on( 'enviar-message', (payload)=>{
-                console.log('send message from client', payload)
+            socket.on( 'enviar-message', async ( payload, callback )=>{
+
+                const id = 123456;
+                callback({id, date: new Date().getTime()});
+            //    this.io.emit('enviar-message', payload)
             })
         })
     }

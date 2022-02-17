@@ -23,6 +23,11 @@ socket.on('disconnect', ()=>{
     lblOnline.style.display  = 'none';
 })
 
+socket.on('enviar-message', (payload)=>{
+
+    console.log(payload);
+})
+
 btnSend.addEventListener( 'click', ()=>{
     const message = txtMessage.value;
     const payload = {
@@ -30,5 +35,7 @@ btnSend.addEventListener( 'click', ()=>{
         id:'123ABC',
         date: new Date().getTime()
     }
-    socket.emit( 'enviar-message', payload );
+    socket.emit( 'enviar-message', payload, (id)=>{
+        console.log('From server', id)
+    });
 } )
