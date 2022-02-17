@@ -1,5 +1,6 @@
 const express = require('express')
-const cors = require('cors')
+const cors = require('cors');
+const { socketController } = require('../sockets/controller');
 
 class Server{
 
@@ -38,20 +39,7 @@ class Server{
     }
 
     sockets(){
-        this.io.on('connection', socket =>{
-            console.log('Connected client', socket.id);
-
-            socket.on('disconnect', ()=>{
-                // console.log('Disconnected client', socket.id);
-            })
-
-            socket.on( 'enviar-message', async ( payload, callback )=>{
-
-                const id = 123456;
-                callback({id, date: new Date().getTime()});
-            //    this.io.emit('enviar-message', payload)
-            })
-        })
+        this.io.on('connection', socketController )
     }
 
     listen(){
